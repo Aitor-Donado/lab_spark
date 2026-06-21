@@ -285,12 +285,16 @@ Si tus alumnos ya tienen Docker instalado, te evitas configuraciones de Java.
 
 1. **Tú (Master):**
 ```bash
-docker run -d --name spark-master --net host bitnami/spark:latest spark-class org.apache.spark.deploy.master.Master
+docker run -d --name spark-master --net host bitnamilegacy/spark:4.0.0-debian-12-r20 spark-class org.apache.spark.deploy.master.Master
 ```
 
 2. **Alumnos (Workers):**
 ```bash
-docker run -d --name spark-worker --net host bitnami/spark:latest spark-class org.apache.spark.deploy.worker.Worker spark://IP_DE_TU_MASTER:7077
+docker run -d --name spark-worker \
+  --net host \
+  -v /home/alumno/lab_spark:/home/alumno/lab_spark \
+  bitnamilegacy/spark:4.0.0-debian-12-r20 \
+  spark-class org.apache.spark.deploy.worker.Worker spark://192.168.0.20:7077
 ```
 
 Si no lo tienen instalado, aquí hay un script de bash para su instalación:
