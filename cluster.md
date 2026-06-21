@@ -373,7 +373,11 @@ docker pull bitnamilegacy/spark:4.0.0-debian-12-r20
 
 Si estás en un Worker, se puede lanzar cuando sepamos la `IP_DE_TU_MASTER`:
 ```bash
-docker run -d --name spark-worker --net host bitnamilegacy/spark:4.0.0-debian-12-r20 spark-class org.apache.spark.deploy.worker.Worker spark://IP_DE_TU_MASTER:7077
+docker run -d --name spark-worker \
+  --net host \
+  -v /home/laptop/lab_spark:/home/laptop/lab_spark \
+  bitnamilegacy/spark:4.0.0-debian-12-r20 \
+  spark-class org.apache.spark.deploy.worker.Worker spark://IP_DE_TU_MASTER:7077
 ```
 
 Si tienes la suerte de ser el Master:
