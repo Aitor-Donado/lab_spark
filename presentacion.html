@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Spark: Infografía Interactiva</title>
+    <style>
+        /* Variables de colores (Branding Spark) */
+        :root {
+            --spark-orange: #E25A1C;
+            --spark-red: #FF2C00;
+            --bg-dark: #fcf5f5;
+            --bg-card: #bee4e4;
+            --bg-code: #142949;
+            --text-main: #523232;
+            --text-muted: #9e1919;
+            --accent-blue: #4FC3F7;
+        }
+
+        /* Estilos generales */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a0a00 100%);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(226, 90, 28, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header h1 span {
+            color: var(--spark-orange);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* Secciones */
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid var(--spark-orange);
+        }
+
+        /* Grid de tarjetas */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            border-color: var(--spark-orange);
+        }
+
+        .card h3 {
+            color: var(--spark-orange);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .card p, .card li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .card ul {
+            list-style-type: none;
+            margin-top: 10px;
+        }
+
+        .card ul li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '➜';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        /* Bloques de código */
+        .code-block {
+            background-color: var(--bg-code);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #c9d1d9;
+        }
+
+        .comment { color: #8b949e; }
+        .keyword { color: #ff7b72; }
+        .string { color: #a5d6ff; }
+        .function { color: #d2a8ff; }
+        .variable { color: #79c0ff; }
+
+        /* Sección MinIO Destacada */
+        .minio-highlight {
+            border: 1px solid var(--accent-blue);
+            background: linear-gradient(180deg, var(--bg-card) 0%, #0a192f 100%);
+        }
+
+        /* Cálculos (Transformaciones vs Acciones) */
+        .calc-box {
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .transformaciones {
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .transformaciones h3 { color: #4CAF50; }
+
+        .acciones {
+            background-color: rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .acciones h3 { color: #F44336; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header>
+        <h1>Apache <span>Spark</span></h1>
+        <p>El Motor Definitivo de Procesamiento de Datos a Gran Escala</p>
+    </header>
+
+    <!-- SECCIÓN 1: QUÉ ES -->
+    <section>
+        <h2>📦 ¿Qué es Apache Spark?</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>🚀 Procesamiento Distribuido</h3>
+                <p>Ejecuta tareas de computación pesadas dividiendo el trabajo entre múltiples máquinas (clústeres) de forma simultánea.</p>
+            </div>
+            <div class="card">
+                <h3>⚡ Velocidad "In-Memory"</h3>
+                <p>A diferencia de Hadoop MapReduce (que escribe en disco), Spark usa la memoria RAM, siendo hasta 100x más rápido.</p>
+            </div>
+            <div class="card">
+                <h3>🧩 Framework Unificado</h3>
+                <p>Une Batch Processing, Streaming en tiempo real, Machine Learning (MLlib) y consultas SQL en una sola API.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: PYSPARK -->
+    <section>
+        <h2>🐍 ¿Cómo usarlo? (PySpark)</h2>
+        <p style="color: var(--text-muted); margin-bottom: 15px;">PySpark es la API de Python. Todo comienza inicializando la <strong style="color:white;">SparkSession</strong>:</p>
+        <div class="code-block">
+            <span class="keyword">from</span> <span class="variable">pyspark.sql</span> <span class="keyword">import</span> <span class="function">SparkSession</span><br><br>
+            <span class="comment"># Crear la conexión (Session) con Spark</span><br>
+            <span class="variable">spark</span> = <span class="function">SparkSession.builder</span> \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">appName</span>(<span class="string">"MiPrimeraApp"</span>) \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">master</span>(<span class="string">"local[*]"</span>) \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">getOrCreate</span>()<br><br>
+            <span class="comment"># ¡Listo! Ahora puedes usar 'spark' para leer y procesar datos.</span>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: ACCESO A DATOS -->
+    <section>
+        <h2>🔌 Formas de Acceder a los Datos</h2>
+        <div class="grid-2">
+            <!-- Local / JDBC -->
+            <div class="card">
+                <h3>1. Archivos Locales (CSV, Parquet)</h3>
+                <div class="code-block" style="margin-top:10px; font-size: 0.85rem;">
+                    <span class="variable">df</span> = <span class="variable">spark</span>.<span class="function">read</span>.<span class="function">csv</span>(<span class="string">"datos/clientes.csv"</span>, <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;header=<span class="keyword">True</span>, inferSchema=<span class="keyword">True</span>)
+                </div>
+                <h3 style="margin-top: 20px;">2. Bases de Datos (JDBC)</h3>
+                <div class="code-block" style="margin-top:10px; font-size: 0.85rem;">
+                    <span class="variable">df</span> = <span class="variable">spark</span>.<span class="function">read</span>.<span class="function">format</span>(<span class="string">"jdbc"</span>) \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">option</span>(<span class="string">"url"</span>, <span class="string">"jdbc:postgresql://..."</span>) \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">option</span>(<span class="string">"dbtable"</span>, <span class="string">"usuarios"</span>) \<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">load</span>()
+                </div>
+            </div>
+
+            <!-- MINIO CON BOTO3 -->
+            <div class="card minio-highlight">
+                <h3>3. MinIO (S3) usando Boto3 🌟</h3>
+                <p style="font-size: 0.9rem;">MinIO es S3 "on-premise". Si requerimos usar <strong style="color:var(--accent-blue)">boto3</strong>, leemos el stream directo a memoria RAM sin tocar el disco:</p>
+                <div class="code-block" style="margin-top:10px; font-size: 0.8rem;">
+                    <span class="keyword">import</span> <span class="variable">boto3</span><br>
+                    <span class="keyword">from</span> <span class="variable">io</span> <span class="keyword">import</span> <span class="function">BytesIO</span><br><br>
+                    <span class="comment"># 1. Conectar Boto3 a MinIO</span><br>
+                    <span class="variable">s3_client</span> = <span class="variable">boto3</span>.<span class="function">client</span>(<span class="string">'s3'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;endpoint_url=<span class="string">'http://localhost:9000'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;aws_access_key_id=<span class="string">'minioadmin'</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;aws_secret_access_key=<span class="string">'minioadmin'</span>)<br><br>
+                    <span class="comment"># 2. Descargar a memoria (BytesIO)</span><br>
+                    <span class="variable">resp</span> = <span class="variable">s3_client</span>.<span class="function">get_object</span>(<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Bucket=<span class="string">'mi-bucket'</span>, Key=<span class="string">'datos.parquet'</span>)<br>
+                    <span class="variable">stream</span> = <span class="function">BytesIO</span>(<span class="variable">resp</span>[<span class="string">'Body'</span>].<span class="function">read</span>())<br><br>
+                    <span class="comment"># 3. Cargar stream en PySpark</span><br>
+                    <span class="variable">df_minio</span> = <span class="variable">spark</span>.<span class="function">read</span>.<span class="function">parquet</span>(<span class="variable">stream</span>)
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: CÁLCULOS -->
+    <section>
+        <h2>⚙️ Tipos de Cálculos en Spark</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Spark funciona con <strong style="color:white;">Evaluación Perezosa (Lazy Evaluation)</strong>. Todo el proceso se divide en dos fases:</p>
+        
+        <div class="grid-2">
+            <div class="calc-box transformaciones">
+                <h3>🔄 TRANSFORMACIONES</h3>
+                <p style="margin-bottom: 10px; color: #ccc;">Preparan el cálculo, pero <strong>NO se ejecutan</strong> hasta que se llama a una Acción.</p>
+                <ul>
+                    <li><code>filter()</code>: Filtrar filas.</li>
+                    <li><code>groupBy().agg()</code>: Agrupar y calcular métricas.</li>
+                    <li><code>join()</code>: Cruce de tablas masivas.</li>
+                    <li><code>withColumn()</code>: Crear columnas nuevas.</li>
+                </ul>
+            </div>
+
+            <div class="calc-box acciones">
+                <h3>🎯 ACCIONES</h3>
+                <p style="margin-bottom: 10px; color: #ccc;">Disparan <strong>TODO</strong> el grafo de transformaciones y devuelven un resultado.</p>
+                <ul>
+                    <li><code>show()</code>: Muestra una muestra en pantalla.</li>
+                    <li><code>count()</code>: Cuenta el total de filas.</li>
+                    <li><code>write()</code>: Guarda el resultado final en disco, MinIO o BD.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px; border-left: 5px solid var(--spark-orange);">
+            <h3>🧠 Cálculos Avanzados Integrados</h3>
+            <ul>
+                <li><strong style="color:white;">Spark SQL:</strong> Permite hacer consultas SQL puras: <code>spark.sql("SELECT ...")</code> sobre DataFrames.</li>
+                <li><strong style="color:white;">Machine Learning (MLlib):</strong> Entrenar modelos (Regresión, Random Forest) distribuidos en clústeres.</li>
+                <li><strong style="color:white;">GraphFrames:</strong> Cálculos de grafos (rutas más cortas, detección de comunidades en redes sociales).</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5: TOLERANCIA A FALLOS -->
+    <section>
+        <div class="card" style="background: linear-gradient(90deg, #1E1E1E 0%, #1a237e 100%); border-color: #3949ab;">
+            <h3 style="color: #7986cb;">🛡️ Tolerancia a Fallos (Resiliencia)</h3>
+            <p>Si un servidor se apulta mientras procesa 1 TB de datos, <strong style="color:white;">Spark no pierde el trabajo</strong>. Gracias a los RDDs (Conjuntos de Datos Distribuidos Resilientes), Spark recuerda el origen de los datos y recalcula <em>únicamente</em> la pieza que falló en otro servidor sano.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Lenguajes soportados:</strong> Python (PySpark) | Scala | Java | R</p>
+        <p style="margin-top: 5px;"><strong>¿Dónde corre?</strong> AWS EMR, Databricks, Google Dataproc, Kubernetes, On-Premise.</p>
+        <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.6;">Infografía web generada para aprender Apache Spark.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

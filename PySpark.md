@@ -1,6 +1,4 @@
-# Tutorial básico de PySpark en Google Colab
-
-Este tutorial te guiará paso a paso en el uso de **PySpark** dentro de Google Colab. Aprenderás a instalar PySpark, crear una sesión, cargar datos desde un CSV y realizar las operaciones más comunes de manipulación de datos.
+# PySpark en Google Colab
 
 ---
 
