@@ -203,7 +203,7 @@ docker run -d --name spark-worker \
   --net host \
   -v /home/alumno/lab_spark:/home/alumno/lab_spark \
   bitnamilegacy/spark:4.0.0-debian-12-r20 \
-  spark-class org.apache.spark.deploy.worker.Worker spark://192.168.0.20:7077
+  spark-class org.apache.spark.deploy.worker.Worker spark://192.168.8.41:7077
 ```
 
 Si no lo tienen instalado, aquí hay un script de bash para su instalación:

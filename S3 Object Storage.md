@@ -62,7 +62,7 @@ Si quieres implementar la **Opción A (MinIO)**, que es la que les dará a tus a
 spark = SparkSession.builder \
     .appName("BacteriaDataset") \
     .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.4") \
-    .config("spark.hadoop.fs.s3a.endpoint", "http://192.168.0.20:9000") \
+    .config("spark.hadoop.fs.s3a.endpoint", "http://192.168.8.41:9000") \
     ...
 
 ```
@@ -102,13 +102,13 @@ docker run -d \
 
 ### Paso 3: Configurar el entorno de tus Alumnos (Workers)
 
-Tus alumnos ya no necesitan clonar gigabytes de imágenes en sus discos locales. Su infraestructura se vuelve extremadamente ligera. Solo necesitan levantar el Worker apuntando a tu Master de Spark (por ejemplo, en la IP `192.168.0.20`), de manera idéntica a como lo tenías:
+Tus alumnos ya no necesitan clonar gigabytes de imágenes en sus discos locales. Su infraestructura se vuelve extremadamente ligera. Solo necesitan levantar el Worker apuntando a tu Master de Spark (por ejemplo, en la IP `192.168.8.41`), de manera idéntica a como lo tenías:
 
 ```bash
 docker run -d --name spark-worker \
   --net host \
   bitnamilegacy/spark:4.0.0-debian-12-r20 \
-  spark-class org.apache.spark.deploy.worker.Worker spark://192.168.0.20:7077
+  spark-class org.apache.spark.deploy.worker.Worker spark://192.168.8.41:7077
 ```
 
 ---
@@ -124,7 +124,7 @@ import os
 from pyspark.sql import SparkSession
 
 # IP de tu ordenador principal (donde corren el Master de Spark y MinIO)
-IP_CENTRAL = "192.168.0.20"
+IP_CENTRAL = "192.168.8.41"
 
 # Inicializar sesión de Spark con los conectores S3A nativos
 spark = SparkSession.builder \

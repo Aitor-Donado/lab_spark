@@ -9,7 +9,7 @@ from pyspark.sql import SparkSession
 # ==========================================
 # 1. CONFIGURACIÓN CENTRALIZADA
 # ==========================================
-IP_CENTRAL = "192.168.0.20"
+IP_CENTRAL = "192.168.8.41"
 BUCKET_NAME = "bacteria-dataset"
 PREFIX_DATASET = "AGAR_demo_extracted/AGAR_representative/"
 
